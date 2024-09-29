@@ -25,25 +25,42 @@ function getHumanChoice(b) {
 
 
 
-function playRound(humanSelection, computerSelection) {
+
+
+function playGame() {
+    function playRound(humanSelection, computerSelection) {
         if ((humanSelection == "rock" && computerSelection == "scissors") || (humanSelection == "scissors" && computerSelection == "paper") || (humanSelection == "paper" && computerSelection == "rock")) {
             ++humanScore;
-            return "You win!"
-
-            
+            alert("You won!")
         }
         else if ((humanSelection == "rock" && computerSelection == "paper") || (humanSelection == "scissors" && computerSelection == "rock") || (humanSelection == "paper" && computerSelection == "scissors")) {
             ++computerScore;
-            return "You lose!"
+            alert("You lost!")
+        }
+        else if (humanSelection == computerSelection) {
+            ++computerScore;
+            ++humanScore;
+            alert("You drew!")
         }
         else {
-            return "Try Again!"
+            console.log("Bug");
         }
     }
+    for (let x = 0; x < 5; x++) {
+        playRound(getHumanChoice(), getComputerChoice());
+    }
+    if (humanScore > computerScore) {
+        alert("You won the game!")
+    }
+    else if (humanScore < computerScore) {
+        alert("You lost the game!")
+    }
+    else {
+        alert("You drew the game")
+    }
+}
 
-playRound(getHumanChoice(), getComputerChoice());
-console.log(humanScore);
-console.log(computerScore);
+playGame();
 
 
 
