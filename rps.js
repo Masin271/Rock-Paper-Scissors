@@ -1,9 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
-const btnR = document.querySelector(".rock");
-const btnP = document.querySelector(".paper");
-const btnS = document.querySelector(".scissors");
 const button = document.querySelectorAll("button");
+const div = document.querySelector("div");
 function getComputerChoice(a) {
   a = Math.random();
   if (a > 0 && a <= 0.33) {
@@ -25,18 +23,15 @@ function playRound(humanSelection, computerSelection) {
     (humanSelection == "paper" && computerSelection == "rock")
   ) {
     ++humanScore;
-    alert("You won!");
   } else if (
     (humanSelection == "rock" && computerSelection == "paper") ||
     (humanSelection == "scissors" && computerSelection == "rock") ||
     (humanSelection == "paper" && computerSelection == "scissors")
   ) {
     ++computerScore;
-    alert("You lost!");
   } else if (humanSelection == computerSelection) {
     ++computerScore;
     ++humanScore;
-    alert("You drew!");
   } else {
     console.log("Bug");
   }
@@ -44,5 +39,20 @@ function playRound(humanSelection, computerSelection) {
 button.forEach(btn => {
   btn.addEventListener("click", () => {
     playRound(btn.className, getComputerChoice());
+    if (computerScore == 5 && humanScore == 5) {
+      div.textContent = "DRAW";
+    }
+    else if (computerScore == 5 && humanScore < 5) {
+      div.textContent = "You Lose!";
+    }
+    else if (computerScore < 5 && humanScore == 5) {
+      div.textContent = "You Win";
+    }
+    else {
+      div.textContent = "Computer: " + computerScore + "You: " + humanScore;
+    }
   })
 });
+
+
+
